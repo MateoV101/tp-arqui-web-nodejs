@@ -1,4 +1,4 @@
-// Estado global de la aplicación
+// javascript para el frontend
 const state = {
   currentPage: 1,
   perPage: 10,
@@ -259,6 +259,37 @@ function escapeHtml(text) {
 }
 
 function init() {
+  // Toggle menú móvil
+  const navToggle = document.getElementById('nav-toggle');
+  const nav = document.querySelector('.nav');
+  if (navToggle && nav) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+    // Cerrar al hacer click fuera
+    document.addEventListener('click', (e) => {
+      if (!nav.contains(e.target) && e.target !== navToggle && nav.classList.contains('open')) {
+        nav.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    // Cerrar al navegar con enlaces
+    nav.querySelectorAll('.nav-link').forEach(link => link.addEventListener('click', () => {
+      if (nav.classList.contains('open')) {
+        nav.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    }));
+    // Reset en cambios de tamaño (evita quedarse abierto al pasar a desktop)
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768 && nav.classList.contains('open')) {
+        nav.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
   const addProductBtn = document.getElementById('add-product-btn');
   if (addProductBtn) addProductBtn.addEventListener('click', openAddProductModal);
   const searchBtn = document.getElementById('search-btn');

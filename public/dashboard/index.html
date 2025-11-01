@@ -15,6 +15,7 @@
                 <span class="logo-icon">📦</span>
                 <span class="logo-text">Stock Manager</span>
             </div>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
             <nav class="nav">
                 <a href="/stock/dashboard" class="nav-link active">Dashboard</a>
                 <a href="/stock/report" class="nav-link">Reports</a>
@@ -38,7 +39,7 @@
 
         <div class="card">
             <div class="table-container">
-                <table class="table">
+                <table class="table table-products">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -64,7 +65,7 @@
             </div>
             <form id="product-form">
                 <div class="form-group">
-                    <label for="product-nombre">Name *</nabel>
+                    <label for="product-nombre">Name *</label>
                     <input type="text" id="product-nombre" class="input" required maxlength="100">
                 </div>
                 <div class="form-group">

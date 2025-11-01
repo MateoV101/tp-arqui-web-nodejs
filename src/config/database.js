@@ -1,18 +1,22 @@
 const { Sequelize } = require('sequelize');
+const path = require('path');
+const fs = require('fs');
 const config = require('./config');
 
-// Crea la instancia de Sequelize a partir de la configuración actual
 function createSequelize() {
-  const db = config.DB;
-  if (db.dialect === 'sqlite') {
-    return new Sequelize({ dialect: 'sqlite', storage: db.storage, logging: false });
+  const storagePath = config.DB_STORAGE;
+
+  if (storagePath && storagePath !== ':memory:') {
+    const dir = path.dirname(storagePath);
+    try {
+      fs.mkdirSync(dir, { recursive: true });
+    } catch (_) {
+    }
   }
-  // Soporte básico para otros dialectos si se configuran por ENV en el futuro
-  // Nota: para MySQL se requiere dependencia 'mysql2'
-  return new Sequelize(db.database, db.username, db.password, {
-    host: db.host,
-    port: db.port,
-    dialect: db.dialect,
+
+  return new Sequelize({
+    dialect: 'sqlite',
+    storage: storagePath,
     logging: false,
   });
 }
