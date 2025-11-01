@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Stock Manager</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📦</text></svg>">
+    <link rel="stylesheet" href="/common/styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-icon">📦</span>
+                <span class="logo-text">Stock Manager</span>
+            </div>
+            <nav class="nav">
+                <a href="/stock/dashboard" class="nav-link">Dashboard</a>
+                <a href="/stock/report" class="nav-link active">Reports</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="content-header">
+            <h1>Inventory Report</h1>
+            <button id="refresh-report-btn" class="btn btn-primary">🔄 Refresh</button>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-content">
+                    <div class="stat-label">Total Products</div>
+                    <div class="stat-value" id="report-total-products">-</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📦</div>
+                <div class="stat-content">
+                    <div class="stat-label">Items in Stock</div>
+                    <div class="stat-value" id="report-total-items">-</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💰</div>
+                <div class="stat-content">
+                    <div class="stat-label">Inventory Value</div>
+                    <div class="stat-value" id="report-total-value">-</div>
+                </div>
+            </div>
+            <div class="stat-card alert">
+                <div class="stat-icon">⚠️</div>
+                <div class="stat-content">
+                    <div class="stat-label">Low Stock Products</div>
+                    <div class="stat-value" id="report-low-stock-count">-</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Low Stock Products</h2>
+                <span class="card-subtitle">Products with less than 10 units</span>
+            </div>
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Current Stock</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody id="low-stock-tbody"></tbody>
+                </table>
+            </div>
+            <div class="pagination" id="report-pagination"></div>
+        </div>
+    </main>
+
+    <div id="loading" class="loading hidden">
+        <div class="spinner"></div>
+    </div>
+    <div id="toast-container"></div>
+    <script src="/common/app.js"></script>
+</body>
+</html>
+
+
